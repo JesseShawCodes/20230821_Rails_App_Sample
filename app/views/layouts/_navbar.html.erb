@@ -35,7 +35,9 @@
           </li>
         </ul>
         <li class="nav-item">
-          <div><%= current_user.name %></div>
+          <% if current_user %>
+            <div><%= current_user.name %></div>
+          <% end %>
         </li>
       </ul>
     </div>

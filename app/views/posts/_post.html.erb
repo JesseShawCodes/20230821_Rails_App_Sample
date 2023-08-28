@@ -13,7 +13,7 @@
   <p>
     <% if post.user_id %>
       <strong>Posted by:</strong>
-      <%= post.user.email %>
+      <%= link_to "#{post.user.name}", user_path(post.user.id) %>
     <% end %>
   </p>
 </div>

@@ -26,6 +26,7 @@
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <% if current_user %>
                 <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+                <li><%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %></li>
               <% else %>
                 <li><%= link_to "Sign Up", new_user_registration_path, class: "dropdown-item" %></li>
                 <li><%= link_to "Sign In", new_user_session_path, class: "dropdown-item" %></li>
@@ -33,6 +34,9 @@
             </ul>
           </li>
         </ul>
+        <li class="nav-item">
+          <div><%= current_user.name %></div>
+        </li>
       </ul>
     </div>
   </div>

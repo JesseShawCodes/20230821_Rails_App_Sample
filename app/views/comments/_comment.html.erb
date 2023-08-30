@@ -3,17 +3,35 @@
     <div>
     <%= comment.user.email %>
     </div>
-    <span>
-    <%= time_ago_in_words(comment.created_at) %>
-    </span>
-
-
     <div>
+        <% if (comment.updated_at - comment.created_at) > 1 %>
+            <span> Edited <%= time_ago_in_words(comment.updated_at) %> ago</span>
+        <% else %>
+            <span> Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
+        <% end %>
+    </div>
+
+
+
+    <div id="<%= dom_id(comment) %>_body">
         <%= comment.body %>
     </div>
     <% if current_user == comment.user %>
         <div class="button-group">
+            <%= link_to "Edit", nil, class: "btn btn-warning", remote: true, data: {
+                controller: "comments",
+                action: "comments#toggleForm",
+                comments_form_param: "edit-form-#{dom_id(comment)}",
+                comments_body_param: "#{dom_id(comment)}_body"
+            } %>
             <%= button_to "Delete", [post, comment], class: "btn btn-danger", method: :delete %>
+        </div>
+        <div id="edit-form-<%= dom_id(comment) %>" class="d-none" >
+            <%= render "comments/form", 
+                post: @post, 
+                comment: comment,
+                button_label: "Update"
+            %>
         </div>
     <% end %>
 </div>

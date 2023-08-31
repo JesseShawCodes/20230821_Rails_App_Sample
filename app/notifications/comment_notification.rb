@@ -4,9 +4,10 @@
 # CommentNotification.with(post: @post).deliver(current_user)
 
 class CommentNotification < Noticed::Base
+  puts "CommentNotification triggered"
   # Add your delivery methods
   #
-  # deliver_by :database
+  deliver_by :database
   # deliver_by :email, mailer: "UserMailer"
   # deliver_by :slack
   # deliver_by :custom, class: "MyDeliveryMethod"
@@ -17,11 +18,16 @@ class CommentNotification < Noticed::Base
 
   # Define helper methods to make rendering easier.
   #
-  # def message
-  #   t(".message")
-  # end
+  def message
+    # t(".message")
+    @post = Post.find(params[:comment][:post_id])
+    @comment = Comment.find(params[:comment][:id])
+    @user = User.find(@comment.user_id)
+
+    "#{@user.name} comment on #{@post.title.truncate(10)}"
+  end
   #
-  # def url
-  #   post_path(params[:post])
-  # end
+  def url
+    post_path(Post.find(params[:comment][:post_id]))
+  end
 end

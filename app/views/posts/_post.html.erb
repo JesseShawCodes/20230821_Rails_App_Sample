@@ -11,6 +11,7 @@
     <%= post.body %>
   </p>
   <p>
+    <%= post.id %>
     <% if post.user_id %>
       <strong>Posted by:</strong>
       <%= link_to "#{post.user.name}", user_path(post.user.id) %>

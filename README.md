@@ -2,3 +2,7 @@
 
 * Noticed Gem Documentation
 https://github.com/excid3/noticed
+
+* Ransack Gem Documentation
+https://activerecord-hackery.github.io/ransack/
+

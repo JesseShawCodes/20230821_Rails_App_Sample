@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :people
   get 'users/profile'
   devise_for :users
   get '/u/:id', to: "users#profile", as: 'user'

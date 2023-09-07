@@ -3,7 +3,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[show index]
   # GET /posts or /posts.json
   def index
+    # @posts = Post.all.reverse
+
     @posts = Post.all.reverse
+
+    @q = Post.ransack(params[:query])
+    @posts = @q.result(distict: true)
   end
 
   # GET /posts/1 or /posts/1.json

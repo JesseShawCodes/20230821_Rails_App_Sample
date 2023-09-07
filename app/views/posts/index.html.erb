@@ -3,11 +3,18 @@
 <h1>Posts</h1>
 
 <div id="posts">
+<%= search_form_for @q do |f| %>
+  <%= f.label :title_cont  %>
+  <%= f.search_field :title_cont  %>
+  <%= f.submit "Search!", class: "btn btn-success" %>
+<% end %>
   <% @posts.each do |post| %>
+    <div class="border">
     <%= render post %>
     <p>
       <%= link_to "Show this post", post %>
     </p>
+    </div>
   <% end %>
 </div>
 

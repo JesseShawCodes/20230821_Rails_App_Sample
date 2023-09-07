@@ -7,9 +7,6 @@ class PeopleController < ApplicationController
 
     @q = Person.ransack(params[:query])
     @people = @q.result(distict: true)
-
-    # puts @q
-    puts @people
   end
 
   # GET /people/1 or /people/1.json

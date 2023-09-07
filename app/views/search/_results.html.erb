@@ -1,0 +1,27 @@
+
+<div class="container">
+<%= pluralize(@people.count, "Result") %>
+<% if @people.count > 0 %>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :name, "Name", default_order: :asc) %></th>
+      <th><%= sort_link(@q, :title, "Title") %></th>
+      <th><%= sort_link(@q, :content, "Content") %></th>
+    </tr>
+    <tbody>
+      <% @people.each do |person| %>
+        <tr>
+        <td><%= link_to person.name, person %></td>
+        <td><%= person.title %></td>
+        <td><%= person.content %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </thead>
+</table>
+<% else %>
+        <p>Sorry there are no results. Please try another search</p>
+<% end %>
+
+</div>

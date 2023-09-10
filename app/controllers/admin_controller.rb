@@ -13,6 +13,6 @@ class AdminController < ApplicationController
   end
 
   def show_post
-    @posts = Post.includes(:user, :comments).find(params[:id ])
+    @post = Post.includes(:user, :comments).find(params[:id ])
   end
 end

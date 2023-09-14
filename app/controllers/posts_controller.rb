@@ -70,6 +70,10 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+
+      if params[:id] != @post.slug
+        return redirect_to @post, :status => :moved_permenantly
+      end
     end
 
     # Only allow a list of trusted parameters through.

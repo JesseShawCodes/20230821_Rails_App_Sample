@@ -8,6 +8,7 @@
   <%= f.search_field :title_cont  %>
   <%= f.submit "Search!", class: "btn btn-success" %>
 <% end %>
+  <%== pagy_bootstrap_nav(@pagy) %>
   <% @posts.each do |post| %>
     <div class="border">
     <%= render post %>

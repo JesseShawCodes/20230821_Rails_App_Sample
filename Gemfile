@@ -80,3 +80,4 @@ gem "noticed", "~> 1.6"
 gem "ransack", "~> 4.0"
 
 gem 'friendly_id', '~> 5.4.0'
+gem "pagy", "~> 6.0"

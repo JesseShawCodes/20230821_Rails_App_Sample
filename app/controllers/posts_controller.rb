@@ -9,6 +9,8 @@ class PostsController < ApplicationController
 
     @q = Post.ransack(params[:query])
     @posts = @q.result(distict: true)
+
+    @pagy, @posts = pagy(Post.all)
   end
 
   # GET /posts/1 or /posts/1.json

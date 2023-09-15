@@ -32,7 +32,7 @@
     <div class="row mt-1">
     <strong>Comments</strong>
         <%= @post %>
-        <% @post.comments.includes([:user, :rich_text_body]).each do |comment| %>
+        <% @post.comments.each do |comment| %>
         <p>
             <%= comment.user.name %>
         </p>

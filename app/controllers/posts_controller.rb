@@ -3,20 +3,19 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[show index]
   # GET /posts or /posts.json
   def index
-    # @posts = Post.all.reverse
 
-    @posts = Post.all.reverse
+    @posts = Post.includes([:rich_text_body, :user]).all.reverse
 
     @q = Post.ransack(params[:query])
     @posts = @q.result(distict: true)
 
-    @pagy, @posts = pagy(Post.all)
+    @pagy, @posts = pagy(@posts )
   end
 
   # GET /posts/1 or /posts/1.json
   def show
     @post.update(views: @post.views + 1)
-    @comments = @post.comments.reverse
+    @comments = @post.comments.includes([:rich_text_body, :user]).reverse
   end
 
   # GET /posts/new

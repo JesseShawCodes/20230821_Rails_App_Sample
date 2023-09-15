@@ -21,7 +21,7 @@
     </div>
     <div class="row mt-1">
         <p>
-            <strong>Author:</strong> <%= "#{@post.user} | #{@post.user.email}" %>
+            <strong>Author:</strong> <%= "#{@post.user.name} | #{@post.user.email}" %>
         </p>
     </div>
     <div class="row mt-1">
@@ -31,7 +31,8 @@
     </div>
     <div class="row mt-1">
     <strong>Comments</strong>
-        <% @post.comments.each do |comment| %>
+        <%= @post %>
+        <% @post.comments.includes([:user, :rich_text_body]).each do |comment| %>
         <p>
             <%= comment.user.name %>
         </p>

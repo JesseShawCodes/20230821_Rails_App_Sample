@@ -81,3 +81,5 @@ gem "ransack", "~> 4.0"
 
 gem 'friendly_id', '~> 5.4.0'
 gem "pagy", "~> 6.0"
+
+gem "bullet", "~> 7.0"

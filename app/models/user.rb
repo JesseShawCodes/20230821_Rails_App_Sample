@@ -12,6 +12,10 @@ class User < ApplicationRecord
   enum role: [:user, :admin]
   after_initialize :set_default_role, if: :new_record?
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   private
 
   def set_default_role

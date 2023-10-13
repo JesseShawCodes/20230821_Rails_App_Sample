@@ -9,51 +9,50 @@ puts "development seed data"
 #   Character.create(name: "Luke", movie: movies.first)
 
 require 'csv'
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'person_dataset.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'user_dataset.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
-  p = Person.new
-  p.name = row['name']
-  p.title = row['title']
-  p.content = row['content']
-  p.save
-
-  puts "#{p.name} saved!"
+  User.create(
+    email: row['email'],
+    password: 'password', 
+    password_confirmation: "password", 
+    last_name: row['last_name'],
+    first_name: row['last_name']
+  ) 
+  puts "User #{row} saved"
 end
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'person_dataset.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'address_dataset.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+
 csv.each do |row|
-  p = Person.new
-  p.name = row['name']
-  p.title = row['title']
-  p.content = row['content']
-  p.save
 
-  puts "#{p.name} saved!"
+  Address.create(
+    street: row['street'],
+    city: row['city'],
+    state: row['state'],
+    zip: row['zip'],
+    country: "USA",
+    user: User.find(row['user']) 
+  ) 
+  puts "Address #{row} saved"
 end
-
-
-User.create(email: "dean@example.com", password: 'password', password_confirmation: "password", name: "dean", role: User.roles[:admin])
-
-User.create(email: "Jesse@example.com", password: 'password', password_confirmation: "password", name: "Jesse")
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'posts_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
   p = Post.new
-  p.title = row['title']
-  p.body = row['body']
-  p.user_id = User.first.id
-  p.save
+  p.title = "#{row['title']}"
+  p.body = "#{row['body']}"
+  p.user_id = rand(1..User.count)
+  p.save!
 
-  puts "Post #{p.id} saved!"
+  # puts "Post #{p.id} saved!"
 
   5.times do |y|
     Comment.create(
       body: "Comment #{y}",
-      user_id: User.second.id,
+      user_id: rand(1..User.count),
       post_id: p.id
     )
   end

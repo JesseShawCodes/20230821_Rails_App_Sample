@@ -17,7 +17,7 @@ csv.each do |row|
     password: 'password', 
     password_confirmation: "password", 
     last_name: row['last_name'],
-    first_name: row['last_name']
+    first_name: row['first_name']
   ) 
   puts "User #{row} saved"
 end
@@ -47,7 +47,7 @@ csv.each do |row|
   p.user_id = rand(1..User.count)
   p.save!
 
-  # puts "Post #{p.id} saved!"
+  puts "Post #{p.id} saved!"
 
   5.times do |y|
     Comment.create(

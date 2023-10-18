@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :people
   get 'users/profile'
   devise_for :users
-  get '/u/:id', to: "users#profile", as: 'user'
+  # get '/user/:id', to: "users#profile", as: 'user'
+
+  resources :users
 
   # /posts/1/comments/4
   resources :posts do 

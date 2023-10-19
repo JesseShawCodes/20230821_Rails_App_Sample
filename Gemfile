@@ -85,3 +85,5 @@ gem "pagy", "~> 6.0"
 gem "bullet", "~> 7.0"
 
 gem "wicked", "~> 2.0"
+
+gem "faker", "~> 3.2"

@@ -11,21 +11,27 @@ puts "development seed data"
 require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'user_dataset.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
-  User.create(
-    email: row['email'],
-    password: 'password', 
-    password_confirmation: "password", 
-    last_name: row['last_name'],
-    first_name: row['first_name']
-  ) 
-  puts "User #{row} saved"
+csv.first(100).each do |row|
+  u = User.new
+  u.password = 'password'
+  u.password_confirmation = 'password'
+  u.last_name = "#{row['last_name']}"
+  u.first_name = "#{row['first_name']}"
+  u.email = "#{row['email']}"
+  if row['admin'] = 1 
+    u.admin!
+  end
+
+  u.save!
+
+  # lasjflksajf
+  puts "User #{u.id} saved!"
 end
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'address_dataset.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
-csv.each do |row|
+csv.first(100).each do |row|
 
   Address.create(
     street: row['street'],
@@ -40,7 +46,7 @@ end
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'posts_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-csv.each do |row|
+csv.first(50).each do |row|
   p = Post.new
   p.title = "#{row['title']}"
   p.body = "#{row['body']}"

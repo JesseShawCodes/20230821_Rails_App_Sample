@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
     # @posts = Post.includes([:rich_text_body, :user]).all
 
-    @q = Post.ransack(params[:query])
+    @q = Post.includes([:user, :category]).ransack(params[:query])
     @posts = @q.result(distict: true)
 
     @pagy, @posts = pagy(@posts )

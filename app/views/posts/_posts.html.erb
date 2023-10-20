@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :id, "id") %></th>
+      <th><%= sort_link(@q, :title, "Title") %></th>
+      <th><%= sort_link(@q, :user_first_name, "User") %></th>
+      <th><%= sort_link(@q, :category_name, "Category") %></th>
+    </tr>
+  </thead>
+  <tbody class="group-divider">
+    <% if @posts.empty? %>
+      <tr>
+        <td colspan="4">No matches found. Please try another search.</td>
+      </tr>
+    <% else %>
+      <%= render @posts %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= raw pagy_bootstrap_nav(@pagy) %>

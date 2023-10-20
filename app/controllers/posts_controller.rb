@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
 
-    @posts = Post.includes([:rich_text_body, :user]).all.reverse
+    # @posts = Post.includes([:rich_text_body, :user]).all
 
     @q = Post.ransack(params[:query])
     @posts = @q.result(distict: true)
@@ -77,6 +77,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :body, :category_id)
+      params.require(:post).permit(:title, :body, :category_id, :user_id)
     end
 end

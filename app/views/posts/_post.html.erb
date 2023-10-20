@@ -1,20 +1,6 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>Title:</strong>
-    <%= post.title %>
-  </p>
-
-  <h6><%= pluralize(post.views, "view") %></h6>
-
-  <p>
-    <strong>Body:</strong>
-    <%= post.body %>
-  </p>
-  <p>
-
-    <% if post.user_id %>
-      <strong>Posted by:</strong>
-      <%= link_to "#{post.user.name}", user_path(post.user.id) %>
-    <% end %>
-  </p>
-</div>
+<tr class="posts">
+  <td class="middle"><%= post.id %></td>
+  <td class="middle"><%= link_to post.title, post.title %></td>
+  <td class="middle"><%= post.user.name %></td>
+  <td class="middle"><%= post.category.name %></td>
+</tr>

@@ -44,6 +44,14 @@ csv.first(100).each do |row|
   puts "Address #{row} saved"
 end
 
+# Create Categories
+Category.create(name: "Manga")
+Category.create(name: "Journal")
+Category.create(name: "Tabloid")
+Category.create(name: "Fanfic")
+Category.create(name: "Movie Review")
+
+
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'posts_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.first(50).each do |row|
@@ -51,6 +59,7 @@ csv.first(50).each do |row|
   p.title = "#{row['title']}"
   p.body = "#{row['body']}"
   p.user_id = rand(1..User.count)
+  p.category_id = Faker::Number.between(from: 1, to: Category.count - 1)
   p.save!
 
   puts "Post #{p.id} saved!"
@@ -64,3 +73,4 @@ csv.first(50).each do |row|
   end
 
 end
+

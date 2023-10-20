@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_022137) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_20_152423) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -61,6 +61,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_022137) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "user_id", null: false
@@ -109,6 +115,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_022137) do
     t.integer "user_id"
     t.string "slug"
     t.integer "comments_count"
+    t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -136,6 +144,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_022137) do
   add_foreign_key "addresses", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "users", "addresses"
 end

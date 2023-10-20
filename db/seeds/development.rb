@@ -47,7 +47,7 @@ Category.create(name: "Movie Review")
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'posts_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-50.times do |row|
+500.times do |row|
   p = Post.new
   p.title = Faker::Lorem.sentence
   p.body = Faker::Lorem.paragraph

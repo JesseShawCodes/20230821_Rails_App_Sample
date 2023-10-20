@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
     extend FriendlyId
     belongs_to :user
+    belongs_to :category
     has_many :comments, dependent: :destroy
 
     has_noticed_notifications model_name: "Notification"

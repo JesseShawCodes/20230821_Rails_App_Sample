@@ -16,7 +16,7 @@
       <%= render 'layouts/navbar' %>
     </header>
     <main>
-      <% if !notice || !alert %>
+      <% if notice || alert %>
         <%= render 'layouts/alerts' %>
       <% end %>
       <%= yield %>

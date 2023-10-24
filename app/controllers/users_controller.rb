@@ -2,10 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
   def index
-    @users = Person.all
+    # @users = Person.all
 
-    @q = Person.ransack(params[:query])
+    @q = User.ransack(params[:query])
     @users = @q.result(distict: true)
+
+    @pagy, @users = pagy(@users)
   end
   
   def profile

@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>userssort_link(@q, :id, "id") %></th>
+      <th>userssort_link(@q, :title, "Title") %></th>
+      <th>userssort_link(@q, :user_first_name, "User") %></th>
+      <th>userssort_link(@q, :category_name, "Category") %></th>
+    </tr>
+  </thead>
+  <tbody class="group-divider">
+    <% if @users.empty? %>
+      <tr>
+        <td colspan="4">No matches found. Please try another search.</td>
+      </tr>
+    <% else %>
+      <%= render @users %>
+    <% end %>
+  </tbody>
+</table>
+

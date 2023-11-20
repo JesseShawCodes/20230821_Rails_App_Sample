@@ -4,13 +4,28 @@ puts "development seed data"
 require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'user_dataset.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+
+# Create Admin User
+
+u = User.new
+u.password = 'p'
+u.password = 'password'
+u.password_confirmation = 'password'
+u.last_name = Faker::Name.last_name
+u.first_name = Faker::Name.first_name
+u.email = "siteadmin@gmail.com"
+
+u.admin!
+
+puts "Site Admin Created! #{u.email}"
+
 100.times do |row|
   u = User.new
   u.password = 'password'
   u.password_confirmation = 'password'
   u.last_name = Faker::Name.last_name
   u.first_name = Faker::Name.first_name
-  u.email = Faker::Internet.email
+  u.email = u.first_name + "." + u.last_name + "@gmail.com"
 
 
   if rand(0..1) == 1
@@ -67,3 +82,4 @@ csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
 end
 
+puts "DEVELOPMENT SEED COMPLETE"

@@ -4,7 +4,6 @@
 # CommentNotification.with(post: @post).deliver(current_user)
 
 class CommentNotification < Noticed::Base
-  puts "CommentNotification triggered"
   # Add your delivery methods
   #
   deliver_by :database

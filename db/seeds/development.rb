@@ -33,24 +33,20 @@ puts "Site Admin Created! #{u.email}"
   end
 
   u.save!
-
-  puts "User #{u.id} saved!"
-end
-
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'address_dataset.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-
-100.times do |index|
-
   Address.create(
     street: Faker::Address.street_name,
     city: Faker::Address.city,
     state: Faker::Address.state_abbr,
     zip: Faker::Address.zip,
     country: "USA",
-    user: User.find(index + 1) 
+    user: User.find(u.id) 
   ) 
+  puts "User #{u.id} saved!"
 end
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'address_dataset.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+
 
 # Create Categories
 Category.create(name: "Manga")
@@ -62,7 +58,7 @@ Category.create(name: "Movie Review")
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'posts_data.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-500.times do |row|
+40.times do |row|
   p = Post.new
   p.title = Faker::Lorem.sentence
   p.body = Faker::Lorem.paragraph
